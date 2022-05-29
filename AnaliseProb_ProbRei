@@ -1,0 +1,171 @@
+<html>
+<head>
+
+
+<!-- Calculo de probabilidade --> 
+<script>
+
+
+</script>
+
+
+
+<!-- Definição da formula de Bayes --> 
+<script>
+
+
+</script>
+
+<!-- Criar Tabuleiro --> 
+<script>
+var contador = 0
+var resultado = 0
+function adicionarDes(){
+	
+	var des =	document.getElementById("selSaida");
+	var ent =	document.getElementById("selentrada");
+	
+	
+	var valor = ent.options[ent.selectedIndex].value;
+	
+	
+	contador = contador +1;
+	var op = document.createElement("option");
+	let d = new Option(valor,'1');
+	des.appendChild(d);
+}
+
+function limpar(){
+	
+	var des =	document.getElementById("selSaida");
+	
+	for(var i=0;des.length;i++){
+	des.options[0]=null;
+	}
+	resultado = 0
+}
+
+function createOption(option, label) {
+  var option = document.createElement("option");
+  option.setAttribute("value", option);
+  option.innerHTML = label;
+  
+  return option;
+}
+
+
+function probabilidade(){
+var tab =	document.getElementById("selSaida")
+var resp = document.getElementById("res")
+resultado = 0
+if(tab.options[0].text=="N"){
+
+resultado = (1/2)+(1/8)
+}
+else 
+{
+resultado = (1/2)*(1/8)
+}
+
+qtde = 0
+
+while(qtde<tab.length){
+
+if((qtde+1)==tab.length){
+
+if(qtde>0){
+resultado = resultado * (1/2)*(1/8)
+}
+else{
+
+break
+
+}
+
+}
+else {
+if(((tab.options[qtde].text=="N") || (tab.options[qtde].text=="E") || (tab.options[qtde].text=="S") || (tab.options[qtde].text=="W" )) && (tab.options[qtde+1].text!="N")){
+resultado = 0
+
+break
+
+}
+else {
+resultado = resultado * (1/2)*(1/8)
+ }
+}
+qtde++
+
+}
+
+
+resp.innerHTML = resultado;
+}
+
+</script>
+
+</head>
+
+<body>
+
+<h1> Problema do Rei </h1>
+
+<h4> 
+- Em um tabuleiro de xadrez, existe apenas um rei (o jogo acabou, mas o rei ainda resolveu que queria se mover sozinho pelo tabuleiro). Entediado, este rei resolveu inventar uma regra de movimento. Se ao andar (ou quando iniciar o movimento) ele alcançar em uma casa branca, ele SEMPRE anda uma casa a mais para a frente (direção N). Se, ao andar ou iniciar, ele alcançar uma casa preta, ele joga 3 moedas justas. Dependendo do resultado das moedas, ele anda para uma das direções possíveis (N, S, W, E, NE, NW, SE, SE).
+
+Se ele chegar em uma das bordas, ele circula para o outro lado (como se o tabuleiro fosse um toroide).
+
+ 
+
+Iniciando em qualquer lugar aleatoriamente, qual a probabilidade de que o rei ande uma sequencia N, S, S, N, NE, SW, SW, NW, NW, SE, SE, NE </h4>
+
+<button onclick="limpar()"> Reiniciar </button>
+
+<br>
+
+<br>
+<a>Escolha os passos a clique em adicionar para calcular a probabilidade.</a>
+<br>
+<br>
+<select multiple id="selentrada" >
+<option id="n"> N </option>
+<option id="s"> S </option>
+<option id="w"> W </option>
+<option id="e"> E </option>
+<option id="ne"> NE </option>
+<option id="nw"> NW </option>
+<option id="se"> SE </option>
+<option id="sw"> SW </option>
+</select>
+
+<a text-color="white">_________________</a>
+
+
+<select multiple id="selSaida" >
+
+</select>
+<br><br>
+<button id="bnt" onclick="adicionarDes()">Adicionar</button>
+<br>
+
+<br>
+<button id="bnt" onclick="probabilidade()">Calcular</button>
+<br>
+
+<br>
+<br>
+
+<a>Resultado: </a>
+<a id="res" > </a>
+<br>
+
+<div id="tab"></div>
+<img src="https://mundoeducacao.uol.com.br/upload/conteudo/probab2.jpg"></img>
+<br>
+
+<br>
+
+<IMG SRC="https://docs.google.com/uc?id=1G7uRLa_MoLg9fFJ0rANh9oV1GeYFlHL2"> </IMG>
+</body>
+
+</html>
